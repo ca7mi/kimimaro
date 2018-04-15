@@ -37,6 +37,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
 
     // イベントオブジェクトを順次処理。
     req.body.events.forEach((event) => {
+        console.log(`${event.message.text}  : eventMsgTxt.`);
         // この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定。
         if (event.type == "message" && event.message.type == "text"){
             // ユーザーからのテキストメッセージが「こんにちは」だった場合のみ反応。
