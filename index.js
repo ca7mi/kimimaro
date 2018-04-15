@@ -49,6 +49,11 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                     type: "text",
                     text: "媚びてくるな！"
                 }));
+            } else if (event.message.text == "きみまろ" || "きみ"){
+                events_processed.push(bot.replyMessage(event.replyToken, {
+                    type: "text",
+                    text: "なぁにー？"
+                }));
             }
 
         }
