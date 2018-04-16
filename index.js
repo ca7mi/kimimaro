@@ -12,7 +12,8 @@ const line_config = {
 
 const status = {
     wake : 1,
-    sleep : 2
+    sleep : 2,
+    sleepingOut : 3
 };
 
 // -----------------------------------------------------------------------------
@@ -42,7 +43,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
         }
 
         if(kimiStatus === status.wake){
-          if(event.source.userId == "U376ef0f525ca673427e3a0494d394650"){
+        /*  if(event.source.userId == "U376ef0f525ca673427e3a0494d394650"){
               events_processed.push(bot.replyMessage(event.replyToken, {
                   type: "text",
                   text: "かなにゃんだー"
@@ -53,15 +54,23 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                   text: "あ、おきじゃん！"
                 }));
               }
+          */
           // この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定。
           if (event.type == "message" && event.message.type == "text"){
             // ユーザーからのテキストメッセージが「こんにちは」だった場合のみ反応。
             if (event.message.text == "おはぽねす"){
                 // replyMessage()で返信し、そのプロミスをevents_processedに追加。
-                events_processed.push(bot.replyMessage(event.replyToken, {
-                    type: "text",
-                    text: "おはぽねす！"
-                }));
+                if(event.source.userId == "Ubac5fd33503f7e37b0ef542ff1d662a2"){
+                  events_processed.push(bot.replyMessage(event.replyToken, {
+                      type: "text",
+                      text: "おきー！おはぽねす！"
+                    }));
+                } else if(event.source.userId == "U376ef0f525ca673427e3a0494d394650"){
+                  events_processed.push(bot.replyMessage(event.replyToken, {
+                      type: "text",
+                      text: "かなにゃんっ♪おはぽねす！"
+                    }));
+                }
             } else if (event.message.text == "おやすみ"){
                 events_processed.push(bot.replyMessage(event.replyToken, {
                     type: "text",
@@ -93,12 +102,25 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
               text: "おきたー"
           }));
         } else if(event.message.text){
+          kimiStatus = status.sleepingOut;
           events_processed.push(bot.replyMessage(event.replyToken, {
               type: "text",
               text: "ねむいのーおはなししないー"
           }));
         };
-      };
+      } else if (kimiStatus === status.sleepingOut) {
+        if(event.message.text == "きみ起きる？"){
+          events_processed.push(bot.replyMessage(event.replyToken, {
+              type: "text",
+              text: "まだねるのー"
+          }));
+        } else if (event.message.text == "きみ寝すぎ") {
+          kimiStatus = status.wake;
+          events_processed.push(bot.replyMessage(event.replyToken, {
+              type: "text",
+              text: "いま起きるとこだもん！"
+          }));
+        };
     });
 
     // すべてのイベント処理が終了したら何個のイベントが処理されたか出力。
