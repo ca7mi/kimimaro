@@ -10,9 +10,9 @@ const line_config = {
     channelSecret: process.env.LINE_CHANNEL_SECRET // 環境変数からChannel Secretをセットしています
 };
 
-var status = {
-    wake = 1,
-    sleep = 2
+const status = {
+    wake : 1,
+    sleep : 2
 };
 
 // -----------------------------------------------------------------------------
