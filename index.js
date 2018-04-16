@@ -10,6 +10,11 @@ const line_config = {
     channelSecret: process.env.LINE_CHANNEL_SECRET // 環境変数からChannel Secretをセットしています
 };
 
+var status = {
+    wake = 1;
+    sleep = 2;
+};
+
 // -----------------------------------------------------------------------------
 // Webサーバー設定
 server.listen(process.env.PORT || 3000);
@@ -17,6 +22,7 @@ server.listen(process.env.PORT || 3000);
 // -----------------------------------------------------------------------------
 // APIコールのためのクライアントインスタンスを作成
 const bot = new line.Client(line_config);
+var kimiStatus;
 
 // -----------------------------------------------------------------------------
 // ルーター設定
@@ -30,8 +36,25 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
     // イベントオブジェクトを順次処理。
     req.body.events.forEach((event) => {
         console.log(`${event.source.userId}  : UserId`);
-        // この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定。
-        if (event.type == "message" && event.message.type == "text"){
+
+        if(!kimiStatus){
+          kimiStatus = status.wake;
+        }
+
+        if(kimiStatus === status.wake){
+          if(event.source.userId == "U376ef0f525ca673427e3a0494d394650"){
+              events_processed.push(bot.replyMessage(event.replyToken, {
+                  type: "text",
+                  text: "かなにゃんだー"
+                }));
+              } else if (event.source.userId == "Ubac5fd33503f7e37b0ef542ff1d662a2") {
+                events_processed.push(bot.replyMessage(event.replyToken, {
+                  type: "text",
+                  text: "あ、おきじゃん！"
+                }));
+              }
+          // この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定。
+          if (event.type == "message" && event.message.type == "text"){
             // ユーザーからのテキストメッセージが「こんにちは」だった場合のみ反応。
             if (event.message.text == "おはぽねす"){
                 // replyMessage()で返信し、そのプロミスをevents_processedに追加。
@@ -42,21 +65,40 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
             } else if (event.message.text == "おやすみ"){
                 events_processed.push(bot.replyMessage(event.replyToken, {
                     type: "text",
-                    text: "良い夢みろよっ"
+                    text: "いい夢みろよっ"
                 }));
             } else if (event.message.text == "かわいい"){
                 events_processed.push(bot.replyMessage(event.replyToken, {
                     type: "text",
-                    text: "媚びてくるな！"
+                    text: "こびてくるな！"
                 }));
             } else if (event.message.text == "きみまろ"){
                 events_processed.push(bot.replyMessage(event.replyToken, {
                     type: "text",
                     text: "なぁにー？"
                 }));
+            } else if (event.message.text == "きみ眠い？"){
+                kimiStatus = status.sleep;
+                events_processed.push(bot.replyMessage(event.replyToken, {
+                    type: "text",
+                    text: "...もうねるー"
+                }));
             }
-
-        }
+          }
+      } else if (kimiStatus === status.sleep ) {
+        if(event.message.text == "きみ起きる？"){
+          kimiStatus = status.wake;
+          events_processed.push(bot.replyMessage(event.replyToken, {
+              type: "text",
+              text: "おきたー"
+          }));
+        } else if(event.message.text){
+          events_processed.push(bot.replyMessage(event.replyToken, {
+              type: "text",
+              text: "ねむいのーおはなししないー"
+          }));
+        };
+      };
     });
 
     // すべてのイベント処理が終了したら何個のイベントが処理されたか出力。
