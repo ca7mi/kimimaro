@@ -121,7 +121,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
               text: "いま起きるとこだもん！"
           }));
         };
-    });
+    };
 
     // すべてのイベント処理が終了したら何個のイベントが処理されたか出力。
     Promise.all(events_processed).then(
