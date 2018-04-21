@@ -2,10 +2,11 @@
 // モジュールのインポート
 const server = require("express")();
 const line = require("@line/bot-sdk"); // Messaging APIのSDKをインポート
-require("dotenv").config();
+const dotenv = require('dotenv').config();
 
 // 使うファイルと繋げる
 const KimiApi = require("./kimi_api");
+dotenv.load();
 
 // -----------------------------------------------------------------------------
 // パラメータ設定
@@ -68,6 +69,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
           */
           // この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定。
           if (event.type == "message" && event.message.type == "text"){
+            console.log(`${process.env.USER_ID_CA7MI}: .envUserId`);
             console.log(`${user_id.oki}  : .envUserId`);
             console.log(`${user_id.ca7mi}  : .envUserId`);
             // ユーザーからのテキストメッセージが「こんにちは」だった場合のみ反応。
