@@ -63,6 +63,8 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
           */
           // この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定。
           if (event.type == "message" && event.message.type == "text"){
+            console.log(`${process.env.USER_ID_OKI}  : .envUserId`);
+            console.log(`${process.env.USER_ID_CA7MI}  : .envUserId`);
             // ユーザーからのテキストメッセージが「こんにちは」だった場合のみ反応。
             if (event.message.text == "おはぽねす"){
                 // replyMessage()で返信し、そのプロミスをevents_processedに追加。
