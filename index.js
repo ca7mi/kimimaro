@@ -5,7 +5,7 @@ const line = require("@line/bot-sdk"); // Messaging APIのSDKをインポート
 require("dotenv").config();
 
 // 使うファイルと繋げる
-const KimiApi = require(/kimi_api.js);
+const KimiApi = require(kimi_api.js);
 
 // -----------------------------------------------------------------------------
 // パラメータ設定
