@@ -2,6 +2,10 @@
 // モジュールのインポート
 const server = require("express")();
 const line = require("@line/bot-sdk"); // Messaging APIのSDKをインポート
+require("dotenv").config();
+
+// 使うファイルと繋げる
+const KimiApi = require(./kimi_api.js);
 
 // -----------------------------------------------------------------------------
 // パラメータ設定
@@ -15,6 +19,8 @@ const status = {
     sleep : 2,
     sleepingOut : 3
 };
+
+const kimiApi = new KimiApi();
 
 // -----------------------------------------------------------------------------
 // Webサーバー設定
@@ -60,12 +66,12 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
             // ユーザーからのテキストメッセージが「こんにちは」だった場合のみ反応。
             if (event.message.text == "おはぽねす"){
                 // replyMessage()で返信し、そのプロミスをevents_processedに追加。
-                if(event.source.userId == "Ubac5fd33503f7e37b0ef542ff1d662a2"){
+                if(event.source.userId == process.env.USER_ID_OKI){
                   events_processed.push(bot.replyMessage(event.replyToken, {
                       type: "text",
                       text: "おきー！おはぽねす！"
                     }));
-                } else if(event.source.userId == "U376ef0f525ca673427e3a0494d394650"){
+                } else if(event.source.userId == process.env.USER_ID_CA7MI){
                   events_processed.push(bot.replyMessage(event.replyToken, {
                       type: "text",
                       text: "かなにゃんっ♪おはぽねす！"
@@ -92,6 +98,12 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                     type: "text",
                     text: "...もうねるー"
                 }));
+            } else if (event.message.text == "なんようび？") {
+              var youbi = kimiApi.getNowDate();
+              events_processed.push(bot.replyMessage(event.replyToken, {
+                  type: "text",
+                  text: youbi
+              }));
             }
           }
       } else if (kimiStatus === status.sleep ) {
