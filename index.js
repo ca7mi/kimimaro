@@ -14,6 +14,11 @@ const line_config = {
     channelSecret: process.env.LINE_CHANNEL_SECRET // 環境変数からChannel Secretをセットしています
 };
 
+const user_id = {
+    oki: process.env.USER_ID_OKI,
+    ca7mi: process.env.USER_ID_CA7MI
+}:
+
 const status = {
     wake : 1,
     sleep : 2,
@@ -63,8 +68,8 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
           */
           // この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定。
           if (event.type == "message" && event.message.type == "text"){
-            console.log(`${process.env.USER_ID_OKI}  : .envUserId`);
-            console.log(`${process.env.USER_ID_CA7MI}  : .envUserId`);
+            console.log(`${user_id.oki}  : .envUserId`);
+            console.log(`${user_id.ca7mi}  : .envUserId`);
             // ユーザーからのテキストメッセージが「こんにちは」だった場合のみ反応。
             if (event.message.text == "おはぽねす"){
                 // replyMessage()で返信し、そのプロミスをevents_processedに追加。
