@@ -17,7 +17,7 @@ const line_config = {
 const user_id = {
     oki: process.env.USER_ID_OKI,
     ca7mi: process.env.USER_ID_CA7MI
-}:
+};
 
 const status = {
     wake : 1,
