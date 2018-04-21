@@ -49,12 +49,12 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
         }
 
         if(kimiStatus === status.wake){
-        /*  if(event.source.userId == "U376ef0f525ca673427e3a0494d394650"){
+        /*  if(event.source.userId == process.env.USER_ID_OKI){
               events_processed.push(bot.replyMessage(event.replyToken, {
                   type: "text",
                   text: "かなにゃんだー"
                 }));
-              } else if (event.source.userId == "Ubac5fd33503f7e37b0ef542ff1d662a2") {
+              } else if (event.source.userId == process.env.USER_ID_CA7MI) {
                 events_processed.push(bot.replyMessage(event.replyToken, {
                   type: "text",
                   text: "あ、おきじゃん！"
