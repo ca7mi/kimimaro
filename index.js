@@ -6,7 +6,6 @@ const dotenv = require('dotenv').config();
 
 // 使うファイルと繋げる
 const KimiApi = require("./kimi_api");
-dotenv.load();
 
 // -----------------------------------------------------------------------------
 // パラメータ設定
