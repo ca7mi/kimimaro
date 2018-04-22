@@ -139,25 +139,11 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
           } else if (event.type == "message" && event.message.type == "sticker") {
             var num = kimiApi.getRandomNumber(140, 179);
             console.log(`num : ${num}`);
-            if(event.source.userId == process.env.USER_ID_OKI){
-                events_processed.push(bot.replyMessage(event.replyToken, {
-                  "type": "sticker",
-                  "packageId": "2",
-                  "stickerId": num
-                  }));
-                } else if (event.source.userId == process.env.USER_ID_CA7MI) {
-                  events_processed.push(bot.replyMessage(event.replyToken, {
-                    "type": "sticker",
-                    "packageId": "2",
-                    "stickerId": num
-                  }));
-                } else {
-                  events_processed.push(bot.replyMessage(event.replyToken, {
-                    "type": "sticker",
-                    "packageId": "2",
-                    "stickerId": "140"
-                  }));
-                }
+            events_processed.push(bot.replyMessage(event.replyToken, {
+                "type": "sticker",
+                "packageId": "2",
+                "stickerId": num
+            }));
           };
       } else if (kimiStatus === status.sleep ) {
         if(event.message.text == "きみ起きる？"){
