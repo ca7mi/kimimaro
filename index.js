@@ -135,10 +135,22 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                   type: "text",
                   text: result
               }));
-            } else if ((event.message.text.match(/ありが/)) || ((event.message.text.match(/あんが/)))){
+            } else if ((event.message.text.match(/ありが/)) || (event.message.text.match(/あんが/))) {
               events_processed.push(bot.replyMessage(event.replyToken, {
                   type: "text",
                   text: "れいにはおよばんっ"
+              }));
+            } else if((event.message.text.match(/あちょ/)) || (event.message.text.match(/ほりゃ/)) || (event.message.text.match(/おりゃ/)) || (event.message.text.match(/ていっ/))) {
+              var response = kimiApi.useDeathblows(null);
+              events_processed.push(bot.replyMessage(event.replyToken, {
+                  type: "text",
+                  text: response
+              }));
+            } else if ((event.message.text.match(/こうげき/)) || (event.message.text.match(/攻撃/)) || (event.message.text.match(/アタック/))) {
+              var response = kimiApi.useDeathblows(3);
+              events_processed.push(bot.replyMessage(event.replyToken, {
+                  type: "text",
+                  text: response
               }));
             };
           // スタンプの時はランダムでスタンプ返す
