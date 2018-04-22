@@ -99,27 +99,27 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                   type: "text",
                   text: now[3]+ "ようびー"
               }));
-            } else if (event.message.type == "sticker") {
-              if(event.source.userId == process.env.USER_ID_OKI){
+            };
+          } else if (event.type == "message" && event.message.type == "sticker") {
+            if(event.source.userId == process.env.USER_ID_OKI){
+                events_processed.push(bot.replyMessage(event.replyToken, {
+                  "type": "sticker",
+                  "packageId": "2",
+                  "stickerId": "163"
+                  }));
+                } else if (event.source.userId == process.env.USER_ID_CA7MI) {
                   events_processed.push(bot.replyMessage(event.replyToken, {
                     "type": "sticker",
                     "packageId": "2",
-                    "stickerId": "163"
-                    }));
-                  } else if (event.source.userId == process.env.USER_ID_CA7MI) {
-                    events_processed.push(bot.replyMessage(event.replyToken, {
-                      "type": "sticker",
-                      "packageId": "2",
-                      "stickerId": "34"
-                    }));
-                  } else {
-                    events_processed.push(bot.replyMessage(event.replyToken, {
-                      "type": "sticker",
-                      "packageId": "2",
-                      "stickerId": "140"
-                    }));
-                  }
-            };
+                    "stickerId": "34"
+                  }));
+                } else {
+                  events_processed.push(bot.replyMessage(event.replyToken, {
+                    "type": "sticker",
+                    "packageId": "2",
+                    "stickerId": "140"
+                  }));
+                }
           };
       } else if (kimiStatus === status.sleep ) {
         if(event.message.text == "きみ起きる？"){
