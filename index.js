@@ -112,21 +112,28 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
             } else if (event.message.text == "仕事終わった") {
               events_processed.push(bot.replyMessage(event.replyToken, {
                   type: "text",
-                  text: "きょうもがんばったねっ！えらいー！"
+                  text: "きょうもがんばったねっ！えらいー"
+              }));
+            } else if (event.message.text == "お家かえった") {
+              events_processed.push(bot.replyMessage(event.replyToken, {
+                  type: "text",
+                  text: "りんご！おかえりんごー"
               }));
             };
           } else if (event.type == "message" && event.message.type == "sticker") {
+            var num = kimiApi.getRandomNumber(140, 179);
+            console.log(`num : ${num}`);
             if(event.source.userId == process.env.USER_ID_OKI){
                 events_processed.push(bot.replyMessage(event.replyToken, {
                   "type": "sticker",
                   "packageId": "2",
-                  "stickerId": "156"
+                  "stickerId": num
                   }));
                 } else if (event.source.userId == process.env.USER_ID_CA7MI) {
                   events_processed.push(bot.replyMessage(event.replyToken, {
                     "type": "sticker",
                     "packageId": "2",
-                    "stickerId": "34"
+                    "stickerId": num
                   }));
                 } else {
                   events_processed.push(bot.replyMessage(event.replyToken, {

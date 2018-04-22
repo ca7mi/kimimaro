@@ -18,4 +18,10 @@ module.exports = class KimiApi {
     var nowTime = new Array(year, month, day, youbi[week], hours, minutes);
     return nowTime;
   };
+
+  // ランダムな数字を取得
+  getRandomNumber(min, max){
+    var result = Math.floor( Math.random() * (max + 1 - min) ) + min;
+    return result;
+  };
 };
