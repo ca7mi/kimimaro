@@ -135,6 +135,11 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                   type: "text",
                   text: result
               }));
+            } else if (event.message.text.match(/ありがと/)){
+              events_processed.push(bot.replyMessage(event.replyToken, {
+                  type: "text",
+                  text: "礼にはおよばんっ"
+              }));
             };
           // スタンプの時はランダムでスタンプ返す
           } else if (event.type == "message" && event.message.type == "sticker") {
