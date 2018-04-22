@@ -2,6 +2,10 @@
 // モジュールのインポート
 const server = require("express")();
 const line = require("@line/bot-sdk"); // Messaging APIのSDKをインポート
+const dotenv = require('dotenv').config(); // TODO: 使いたいけどうまく反映されない
+
+// 使うファイルと繋げる
+const KimiApi = require("./kimi_api");
 
 // -----------------------------------------------------------------------------
 // パラメータ設定
@@ -10,11 +14,18 @@ const line_config = {
     channelSecret: process.env.LINE_CHANNEL_SECRET // 環境変数からChannel Secretをセットしています
 };
 
+const user_id = {
+    oki: process.env.USER_ID_OKI,
+    ca7mi: process.env.USER_ID_CA7MI
+};
+
 const status = {
     wake : 1,
     sleep : 2,
     sleepingOut : 3
 };
+
+const kimiApi = new KimiApi();
 
 // -----------------------------------------------------------------------------
 // Webサーバー設定
@@ -43,12 +54,12 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
         }
 
         if(kimiStatus === status.wake){
-        /*  if(event.source.userId == "U376ef0f525ca673427e3a0494d394650"){
+        /*  if(event.source.userId == process.env.USER_ID_OKI){
               events_processed.push(bot.replyMessage(event.replyToken, {
                   type: "text",
                   text: "かなにゃんだー"
                 }));
-              } else if (event.source.userId == "Ubac5fd33503f7e37b0ef542ff1d662a2") {
+              } else if (event.source.userId == process.env.USER_ID_CA7MI) {
                 events_processed.push(bot.replyMessage(event.replyToken, {
                   type: "text",
                   text: "あ、おきじゃん！"
@@ -57,15 +68,18 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
           */
           // この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定。
           if (event.type == "message" && event.message.type == "text"){
+            console.log(`${process.env.USER_ID_CA7MI}: .envUserId`);
+            console.log(`${user_id.oki}  : .envUserId`);
+            console.log(`${user_id.ca7mi}  : .envUserId`);
             // ユーザーからのテキストメッセージが「こんにちは」だった場合のみ反応。
             if (event.message.text == "おはぽねす"){
                 // replyMessage()で返信し、そのプロミスをevents_processedに追加。
-                if(event.source.userId == "Ubac5fd33503f7e37b0ef542ff1d662a2"){
+                if(event.source.userId == process.env.USER_ID_OKI){
                   events_processed.push(bot.replyMessage(event.replyToken, {
                       type: "text",
                       text: "おきー！おはぽねす！"
                     }));
-                } else if(event.source.userId == "U376ef0f525ca673427e3a0494d394650"){
+                } else if(event.source.userId == process.env.USER_ID_CA7MI){
                   events_processed.push(bot.replyMessage(event.replyToken, {
                       type: "text",
                       text: "かなにゃんっ♪おはぽねす！"
@@ -92,6 +106,12 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                     type: "text",
                     text: "...もうねるー"
                 }));
+            } else if (event.message.text == "なんようび？") {
+              var now = kimiApi.getNowDate();
+              events_processed.push(bot.replyMessage(event.replyToken, {
+                  type: "text",
+                  text: now[3]+ "ようびー"
+              }));
             }
           }
       } else if (kimiStatus === status.sleep ) {
