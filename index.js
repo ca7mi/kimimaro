@@ -138,7 +138,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
             } else if (event.message.text.match(/ありが/)){
               events_processed.push(bot.replyMessage(event.replyToken, {
                   type: "text",
-                  text: "礼にはおよばんっ"
+                  text: "れいにはおよばんっ"
               }));
             };
           // スタンプの時はランダムでスタンプ返す
