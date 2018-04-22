@@ -2,7 +2,7 @@
 // モジュールのインポート
 const server = require("express")();
 const line = require("@line/bot-sdk"); // Messaging APIのSDKをインポート
-const dotenv = require('dotenv').config();
+const dotenv = require('dotenv').config(); // TODO: 使いたいけどうまく反映されない
 
 // 使うファイルと繋げる
 const KimiApi = require("./kimi_api");
