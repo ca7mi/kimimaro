@@ -136,7 +136,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                   text: result
               }));
             } else if ((event.message.text.match(/ありが/)) || ((event.message.text.match(/あんが/)))){
-              events_processed.push(bot.replyMessage(event.replyToken, {ß
+              events_processed.push(bot.replyMessage(event.replyToken, {
                   type: "text",
                   text: "れいにはおよばんっ"
               }));
