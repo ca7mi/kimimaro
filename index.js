@@ -10,8 +10,8 @@ const KimiApi = require("./kimi_api");
 // -----------------------------------------------------------------------------
 // パラメータ設定
 const line_config = {
-    channelAccessToken: process.env.LINE_ACCESS_TOKEN, // 環境変数からアクセストークンをセットしています
-    channelSecret: process.env.LINE_CHANNEL_SECRET // 環境変数からChannel Secretをセットしています
+    channelAccessToken: process.env.LINE_ACCESS_TOKEN, // 環境変数からアクセストークンをセット
+    channelSecret: process.env.LINE_CHANNEL_SECRET // 環境変数からChannel Secretをセット
 };
 
 const user_id = {
@@ -54,21 +54,8 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
         }
 
         if(kimiStatus === status.wake){
-        /*  if(event.source.userId == process.env.USER_ID_OKI){
-              events_processed.push(bot.replyMessage(event.replyToken, {
-                  type: "text",
-                  text: "かなにゃんだー"
-                }));
-              } else if (event.source.userId == process.env.USER_ID_CA7MI) {
-                events_processed.push(bot.replyMessage(event.replyToken, {
-                  type: "text",
-                  text: "あ、おきじゃん！"
-                }));
-              }
-          */
-          // この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定。
+          // イベントタイプがメッセージ&テキストタイプだった場合
           if (event.type == "message" && event.message.type == "text"){
-            console.log(`${process.env.USER_ID_CA7MI}: .envUserId`);
             console.log(`${user_id.oki}  : .envUserId`);
             console.log(`${user_id.ca7mi}  : .envUserId`);
             // ユーザーからのテキストメッセージが「こんにちは」だった場合のみ反応。
@@ -95,7 +82,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                     type: "text",
                     text: "こびてくるな！"
                 }));
-            } else if (event.message.text == "きみまろ"){
+            } else if ((event.message.text == "きみまろ") || (event.message.text == "きみ") ){
                 events_processed.push(bot.replyMessage(event.replyToken, {
                     type: "text",
                     text: "なぁにー？"
@@ -112,8 +99,33 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                   type: "text",
                   text: now[3]+ "ようびー"
               }));
-            }
-          }
+            } else if (event.message.text == "おきにあやまろ？") {
+              events_processed.push(bot.replyMessage(event.replyToken, {
+                  type: "text",
+                  text: "うー・・・おきごめんねー"
+              }));
+            };
+          } else if (event.type == "message" && event.message.type == "sticker") {
+            if(event.source.userId == process.env.USER_ID_OKI){
+                events_processed.push(bot.replyMessage(event.replyToken, {
+                  "type": "sticker",
+                  "packageId": "2",
+                  "stickerId": "156"
+                  }));
+                } else if (event.source.userId == process.env.USER_ID_CA7MI) {
+                  events_processed.push(bot.replyMessage(event.replyToken, {
+                    "type": "sticker",
+                    "packageId": "2",
+                    "stickerId": "34"
+                  }));
+                } else {
+                  events_processed.push(bot.replyMessage(event.replyToken, {
+                    "type": "sticker",
+                    "packageId": "2",
+                    "stickerId": "140"
+                  }));
+                }
+          };
       } else if (kimiStatus === status.sleep ) {
         if(event.message.text == "きみ起きる？"){
           kimiStatus = status.wake;
