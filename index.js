@@ -103,7 +103,8 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
               events_processed.push(bot.replyMessage(event.replyToken, {
                   type: "text",
                   text: "うー・・・おきごめんねー"
-              }));;
+              }));
+            };
           } else if (event.type == "message" && event.message.type == "sticker") {
             if(event.source.userId == process.env.USER_ID_OKI){
                 events_processed.push(bot.replyMessage(event.replyToken, {
