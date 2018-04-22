@@ -54,18 +54,20 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
         }
 
         if(kimiStatus === status.wake){
-        /*  if(event.source.userId == process.env.USER_ID_OKI){
+          if(event.source.userId == process.env.USER_ID_OKI){
               events_processed.push(bot.replyMessage(event.replyToken, {
-                  type: "text",
-                  text: "かなにゃんだー"
+                "type": "sticker",
+                "packageId": "2",
+                "stickerId": "163"
                 }));
               } else if (event.source.userId == process.env.USER_ID_CA7MI) {
                 events_processed.push(bot.replyMessage(event.replyToken, {
-                  type: "text",
-                  text: "あ、おきじゃん！"
+                  "type": "sticker",
+                  "packageId": "2",
+                  "stickerId": "34"
                 }));
               }
-          */
+
           // この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定。
           if (event.type == "message" && event.message.type == "text"){
             console.log(`${process.env.USER_ID_CA7MI}: .envUserId`);
