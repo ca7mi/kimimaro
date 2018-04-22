@@ -110,7 +110,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
               var now = kimiApi.getNowDate();
               events_processed.push(bot.replyMessage(event.replyToken, {
                   type: "text",
-                  text: now[3]
+                  text: now[3]+ "ようびー"
               }));
             }
           }
