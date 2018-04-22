@@ -37,7 +37,7 @@ const bot = new line.Client(line_config);
 var kimiStatus;
 
 // -----------------------------------------------------------------------------
-// ルーター設定
+// Botの反応
 server.post('/webhook', line.middleware(line_config), (req, res, next) => {
     // 先行してLINE側にステータスコード200でレスポンスする。
     res.sendStatus(200);
@@ -136,6 +136,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                   text: result
               }));
             };
+          // スタンプの時はランダムでスタンプ返す
           } else if (event.type == "message" && event.message.type == "sticker") {
             var num = kimiApi.getRandomNumber(140, 179);
             console.log(`num : ${num}`);
