@@ -107,10 +107,10 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                     text: "...もうねるー"
                 }));
             } else if (event.message.text == "なんようび？") {
-              var youbi = kimiApi.getNowDate();
+              var now = kimiApi.getNowDate();
               events_processed.push(bot.replyMessage(event.replyToken, {
                   type: "text",
-                  text: youbi
+                  text: now[3]
               }));
             }
           }
