@@ -47,7 +47,7 @@ module.exports = class KimiApi {
   useDeathblows(feeling){
     var response;
     if(!feeling){
-      feeling = getRandomNumber(1,3);
+      feeling = this.getRandomNumber(1,3);
     };
 
     switch (feeling) {
