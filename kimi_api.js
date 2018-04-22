@@ -24,4 +24,14 @@ module.exports = class KimiApi {
     var result = Math.floor( Math.random() * (max + 1 - min) ) + min;
     return result;
   };
+
+  playOmikuji(){
+    var contents = new Array("神吉","特大吉","大吉","吉","中吉","末吉","微吉","ちょい吉",
+                              "なんもない日","運勢とか気にするな","なんとかなる日","あめ降るかも","風に飛ばされる",
+                              "ごはんは少なめ","お魚たべて","お肉がいいよ","おやつはバナナ","やさい足りてないよ？",
+                              "微凶","ちょい凶","凶","小凶","中凶","大凶","特大凶","破滅","闇","奈落の底");
+
+    var omikujiResult = contents[ Math.floor( Math.random() * contents.length) ];
+    return omikujiResult;
+  };
 };

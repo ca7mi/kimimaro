@@ -56,8 +56,6 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
         if(kimiStatus === status.wake){
           // イベントタイプがメッセージ&テキストタイプだった場合
           if (event.type == "message" && event.message.type == "text"){
-            console.log(`${user_id.oki}  : .envUserId`);
-            console.log(`${user_id.ca7mi}  : .envUserId`);
             // ユーザーからのテキストメッセージが「こんにちは」だった場合のみ反応。
             if (event.message.text == "おはぽねす"){
                 // replyMessage()で返信し、そのプロミスをevents_processedに追加。
@@ -100,9 +98,21 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                   text: now[3]+ "ようびー"
               }));
             } else if (event.message.text == "おきにあやまろ？") {
+              if(event.source.userId == process.env.USER_ID_OKI){
+                events_processed.push(bot.replyMessage(event.replyToken, {
+                    type: "text",
+                    text: "やだ！あやまんない！"
+                }));
+              } else if(event.source.userId == process.env.USER_ID_CA7MI){
+                events_processed.push(bot.replyMessage(event.replyToken, {
+                    type: "text",
+                    text: "うー・・・おきごめんねー"
+                }));
+              };
+            } else if(event.message.text == "あかんのんか？"){
               events_processed.push(bot.replyMessage(event.replyToken, {
                   type: "text",
-                  text: "うー・・・おきごめんねー"
+                  text: "あかんのん！！！"
               }));
             } else if (event.message.text == "つかれた") {
               events_processed.push(bot.replyMessage(event.replyToken, {
@@ -117,7 +127,13 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
             } else if (event.message.text == "お家かえった") {
               events_processed.push(bot.replyMessage(event.replyToken, {
                   type: "text",
-                  text: "おかえりんご!"
+                  text: "おかえりんごっ！"
+              }));
+            } else if (event.message.text == "うらなって！") {
+              var result = kimiApi.playOmikuji();
+              events_processed.push(bot.replyMessage(event.replyToken, {
+                  type: "text",
+                  text: result
               }));
             };
           } else if (event.type == "message" && event.message.type == "sticker") {
