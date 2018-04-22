@@ -6,8 +6,6 @@ module.exports = class KimiApi {
 
   // 時間を所得する
   getNowDate(){
-    var nowTime = [];
-
     var now = new Date();
     var year = now.getFullYear();
     var month = now.getMonth()+1;
@@ -17,7 +15,7 @@ module.exports = class KimiApi {
     var hours = now.getHours();
     var minutes = now.getMinutes();
 
-
-    return nowTime(year, month, day, youbi[week], hours, minutes);
+    var nowTime = new Array(year, month, day, youbi[week], hours, minutes);
+    return nowTime;
   };
 };
