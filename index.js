@@ -99,7 +99,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                   type: "text",
                   text: now[3]+ "ようびー"
               }));
-            } else if (event.message.sticker) {
+            } else if (event.message.type == "sticker") {
               if(event.source.userId == process.env.USER_ID_OKI){
                   events_processed.push(bot.replyMessage(event.replyToken, {
                     "type": "sticker",
