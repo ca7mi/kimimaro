@@ -103,6 +103,10 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                   type: "text",
                   text: now[4]+ "じ" + now[5]+ "ふん"
               }));
+              events_processed.push(bot.replyMessage(event.replyToken, {
+                  type: "text",
+                  text: now[1]+ "がつ" + now[2]+ "にち"
+              }));
             } else if (event.message.text == "おきにあやまろ？") {
               if(event.source.userId == process.env.USER_ID_OKI){
                 events_processed.push(bot.replyMessage(event.replyToken, {
