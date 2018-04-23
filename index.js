@@ -135,7 +135,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                   type: "text",
                   text: "おかえりんごっ！"
               }));
-            } else if (event.message.text == "うらなって！") {
+            } else if (event.message.text.match(/うらな[っ,い,う,え,お]/)) {
               var result = kimiApi.playOmikuji();
               events_processed.push(bot.replyMessage(event.replyToken, {
                   type: "text",
