@@ -97,6 +97,12 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                   type: "text",
                   text: now[3]+ "ようびー"
               }));
+            } else if (event.message.text == "いまなんじ？") {
+              var now = kimiApi.getNowDate();
+              events_processed.push(bot.replyMessage(event.replyToken, {
+                  type: "text",
+                  text: now[4]+ "じ" + now[5]+ "ふん"
+              }));
             } else if (event.message.text == "おきにあやまろ？") {
               if(event.source.userId == process.env.USER_ID_OKI){
                 events_processed.push(bot.replyMessage(event.replyToken, {
