@@ -158,6 +158,11 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                   type: "text",
                   text: response
               }));
+            } else if (event.message.text.match(/だな！{0,}$/)) {
+              events_processed.push(bot.replyMessage(event.replyToken, {
+                  type: "text",
+                  text: "だな！"
+              }));
             };
           // スタンプの時はランダムでスタンプ返す
           } else if (event.type == "message" && event.message.type == "sticker") {
