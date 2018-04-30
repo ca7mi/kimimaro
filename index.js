@@ -152,7 +152,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                   type: "text",
                   text: response
               }));
-            } else if ((event.message.text.match(/こうげき/)) || (event.message.text.match(/攻撃/)) || (event.message.text.match(/アタック/)) || (event.message.text.match(/新技/)) {
+            } else if ((event.message.text.match(/こうげき/)) || (event.message.text.match(/攻撃/)) || (event.message.text.match(/アタック/)) || (event.message.text.match(/新技/))) {
               var response = kimiApi.useDeathblows(3);
               events_processed.push(bot.replyMessage(event.replyToken, {
                   type: "text",
