@@ -130,7 +130,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                   type: "text",
                   text: "きょうもがんばったねっ！えらいー"
               }));
-            } else if (event.message.text == "お家かえった") {
+            } else if ((event.message.text == "お家かえった") || (event.message.text.match(/ただいま/))) {
               events_processed.push(bot.replyMessage(event.replyToken, {
                   type: "text",
                   text: "おかえりんごっ！"
