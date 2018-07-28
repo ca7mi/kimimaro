@@ -86,10 +86,6 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                     },
                 ];
                 events_processed.push(bot.replyMessage(event.replyToken, messages));
-                /*events_processed.push(bot.replyMessage(event.replyToken, {
-                    type: "text",
-                    text: "いい夢みろよっ"
-                })); */
             } else if (event.message.text == "かわいい"){
                 events_processed.push(bot.replyMessage(event.replyToken, {
                     type: "text",
