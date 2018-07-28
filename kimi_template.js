@@ -5,7 +5,6 @@ module.exports = class KimiTemplate {
 
     // ボタンテンプレートを使ってみる
     selectGameWithKimi(){
-        var response;
         var buttonTemp = [{
             "type": "template",
             "altText": "きみまろとあそぶ",
@@ -27,11 +26,10 @@ module.exports = class KimiTemplate {
                       "type": "postback",
                       "label": "アキネーター",
                       "data": "akinator"
-                    },
+                    }
                 ]
             }
-        }]
-        response = buttonTemp;
-        return response;
+        }];
+        return buttonTemp;
     }
 }
