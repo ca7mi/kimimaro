@@ -188,6 +188,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                     "altText": "きみまろとあそぶ",
                     "template": {
                         "type": "buttons",
+                        "altText": "Kimi Games",
                         "title": "ゲームをえらんで。",
                         "text": "何してあそぶ？",
                         "actions": [
