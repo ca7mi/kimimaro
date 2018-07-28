@@ -79,11 +79,11 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                     type: "text",
                     text: "おやすみ"
                 }));
-                events_processed.push(bot.replyMessage(event.replyToken, {
+               /* events_processed.push(bot.replyMessage(event.replyToken, {
                     type: "text",
                     text: "また明日な！"
                 }));
-              /*  events_processed.push(bot.replyMessage(event.replyToken, {
+                events_processed.push(bot.replyMessage(event.replyToken, {
                     "type": "sticker",
                     "packageId": "1",
                     "stickerId": "2"
