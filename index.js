@@ -10,8 +10,8 @@ const KimiApi = require("./kimi_api");
 // -----------------------------------------------------------------------------
 // パラメータ設定
 const line_config = {
-    channelAccessToken: process.env.LINE_ACCESS_TOKEN, // 環境変数からアクセストークンをセットしています
-    channelSecret: process.env.LINE_CHANNEL_SECRET // 環境変数からChannel Secretをセットしています
+    channelAccessToken: process.env.LINE_ACCESS_TOKEN, // 環境変数からアクセストークンをセット
+    channelSecret: process.env.LINE_CHANNEL_SECRET // 環境変数からChannel Secretをセット
 };
 
 const user_id = {
@@ -37,7 +37,7 @@ const bot = new line.Client(line_config);
 var kimiStatus;
 
 // -----------------------------------------------------------------------------
-// ルーター設定
+// Botの反応
 server.post('/webhook', line.middleware(line_config), (req, res, next) => {
     // 先行してLINE側にステータスコード200でレスポンスする。
     res.sendStatus(200);
@@ -54,23 +54,8 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
         }
 
         if(kimiStatus === status.wake){
-        /*  if(event.source.userId == process.env.USER_ID_OKI){
-              events_processed.push(bot.replyMessage(event.replyToken, {
-                  type: "text",
-                  text: "かなにゃんだー"
-                }));
-              } else if (event.source.userId == process.env.USER_ID_CA7MI) {
-                events_processed.push(bot.replyMessage(event.replyToken, {
-                  type: "text",
-                  text: "あ、おきじゃん！"
-                }));
-              }
-          */
-          // この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定。
+          // イベントタイプがメッセージ&テキストタイプだった場合
           if (event.type == "message" && event.message.type == "text"){
-            console.log(`${process.env.USER_ID_CA7MI}: .envUserId`);
-            console.log(`${user_id.oki}  : .envUserId`);
-            console.log(`${user_id.ca7mi}  : .envUserId`);
             // ユーザーからのテキストメッセージが「こんにちは」だった場合のみ反応。
             if (event.message.text == "おはぽねす"){
                 // replyMessage()で返信し、そのプロミスをevents_processedに追加。
@@ -95,7 +80,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                     type: "text",
                     text: "こびてくるな！"
                 }));
-            } else if (event.message.text == "きみまろ"){
+            } else if ((event.message.text == "きみまろ") || (event.message.text == "きみ") ){
                 events_processed.push(bot.replyMessage(event.replyToken, {
                     type: "text",
                     text: "なぁにー？"
@@ -112,8 +97,83 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                   type: "text",
                   text: now[3]+ "ようびー"
               }));
-            }
-          }
+            } else if (event.message.text == "いまなんじ？") {
+              var now = kimiApi.getNowDate();
+              events_processed.push(bot.replyMessage(event.replyToken, {
+                  type: "text",
+                  text: now[4]+ "じ" + now[5]+ "ふん"
+              }));
+            } else if (event.message.text == "おきにあやまろ？") {
+              if(event.source.userId == process.env.USER_ID_OKI){
+                events_processed.push(bot.replyMessage(event.replyToken, {
+                    type: "text",
+                    text: "やだ！あやまんない！"
+                }));
+              } else if(event.source.userId == process.env.USER_ID_CA7MI){
+                events_processed.push(bot.replyMessage(event.replyToken, {
+                    type: "text",
+                    text: "うー・・・おきごめんねー"
+                }));
+              };
+            } else if(event.message.text == "あかんのんか？"){
+              events_processed.push(bot.replyMessage(event.replyToken, {
+                  type: "text",
+                  text: "あかんのん！！！"
+              }));
+            } else if (event.message.text == "つかれた") {
+              events_processed.push(bot.replyMessage(event.replyToken, {
+                  type: "text",
+                  text: "おちゅかれさまんさ"
+              }));
+            } else if (event.message.text == "仕事終わった") {
+              events_processed.push(bot.replyMessage(event.replyToken, {
+                  type: "text",
+                  text: "きょうもがんばったねっ！えらいー"
+              }));
+            } else if ((event.message.text == "お家かえった") || (event.message.text.match(/ただいま/))) {
+              events_processed.push(bot.replyMessage(event.replyToken, {
+                  type: "text",
+                  text: "おかえりんごっ！"
+              }));
+            } else if (event.message.text.match(/うらな[っ,い,う,え,お]/)) {
+              var result = kimiApi.playOmikuji();
+              events_processed.push(bot.replyMessage(event.replyToken, {
+                  type: "text",
+                  text: result
+              }));
+            } else if ((event.message.text.match(/ありが/)) || (event.message.text.match(/あんが/))) {
+              events_processed.push(bot.replyMessage(event.replyToken, {
+                  type: "text",
+                  text: "れいにはおよばんっ"
+              }));
+            } else if((event.message.text.match(/あちょ/)) || (event.message.text.match(/ほりゃ/)) || (event.message.text.match(/おりゃ/)) || (event.message.text.match(/ていっ/))) {
+              var response = kimiApi.useDeathblows(null);
+              events_processed.push(bot.replyMessage(event.replyToken, {
+                  type: "text",
+                  text: response
+              }));
+            } else if ((event.message.text.match(/こうげき/)) || (event.message.text.match(/攻撃/)) || (event.message.text.match(/アタック/)) || (event.message.text.match(/新技/))) {
+              var response = kimiApi.useDeathblows(3);
+              events_processed.push(bot.replyMessage(event.replyToken, {
+                  type: "text",
+                  text: response
+              }));
+            } else if (event.message.text.match(/だな！{0,}$/)) {
+              events_processed.push(bot.replyMessage(event.replyToken, {
+                  type: "text",
+                  text: "だな！"
+              }));
+            };
+          // スタンプの時はランダムでスタンプ返す
+          } else if (event.type == "message" && event.message.type == "sticker") {
+            var num = kimiApi.getRandomNumber(140, 179);
+            console.log(`num : ${num}`);
+            events_processed.push(bot.replyMessage(event.replyToken, {
+                "type": "sticker",
+                "packageId": "2",
+                "stickerId": num
+            }));
+          };
       } else if (kimiStatus === status.sleep ) {
         if(event.message.text == "きみ起きる？"){
           kimiStatus = status.wake;
