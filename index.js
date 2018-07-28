@@ -188,24 +188,21 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                     "altText": "きみまろとあそぶ",
                     "template": {
                         "type": "buttons",
-                        "thumbnailImageUrl": "/image/kimi_1.jpg",
-                        "imageAspectRatio": "rectangle",
-                        "imageSize": "cover",
-                        "imageBackgroundColor": "#FFFFFF",
                         "title": "ゲームをえらんで。",
                         "text": "何してあそぶ？",
                         "actions": [
                             {
-                                "type": "postback",
+                                "type": "message",
                                 "label": "じゃんけん",
                                 "data": "janken"
                             },
                             {
-                                "type": "postback",
+                                "type": "message",
                                 "label": "アキネーター",
                                 "data": "akinator"
                             }
-                        ]
+                        ],
+                        "thumbnailImageUrl": "/image/kimi_3.png"
                     }
                 }));
             }
