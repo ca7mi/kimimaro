@@ -89,4 +89,20 @@ module.exports = class KimiApi {
     return response;
   };
 
+  goForIt(){
+    var response = [{
+      type: "text",
+      text: "がんばれ！"
+  },
+  {
+      type: "text",
+      text: "おこづかいほしいんだっ"
+  },
+  {
+      "type": "sticker",
+      "packageId": "1",
+      "stickerId": "4"
+  },];
+    return response;
+  }
 };
