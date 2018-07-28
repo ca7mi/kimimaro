@@ -71,14 +71,20 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                     }));
                 }
             } else if (event.message.text == "おやすみ"){
-                events_processed.push(bot.replyMessage(event.replyToken, {
+                var messages = [{
                     type: "text",
                     text: "いい夢みろよっ"
-                }));
-                events_processed.push(bot.replyMessage(event.replyToken, {
+                    },
+                    {
+                        type: "text",
+                        text: "おやすみ"
+                        },
+                ];
+                events_processed.push(bot.replyMessage(event.replyToken, messages));
+                /*events_processed.push(bot.replyMessage(event.replyToken, {
                     type: "text",
-                    text: "おやすみ"
-                }));
+                    text: "いい夢みろよっ"
+                })); */
             } else if (event.message.text == "かわいい"){
                 events_processed.push(bot.replyMessage(event.replyToken, {
                     type: "text",
