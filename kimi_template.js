@@ -8,36 +8,26 @@ module.exports = class KimiTemplate {
         var response;
         var buttonTemp = [{
             "type": "template",
-            "altText": "This is a buttons template",
+            "altText": "きみまろとあそぶ",
             "template": {
                 "type": "buttons",
                 "thumbnailImageUrl": "./image/kimi_1.jpg",
                 "imageAspectRatio": "rectangle",
                 "imageSize": "cover",
                 "imageBackgroundColor": "#FFFFFF",
-                "title": "Menu",
-                "text": "Please select",
-                "defaultAction": {
-                    "type": "uri",
-                    "label": "View detail",
-                    "uri": "./image/kimi_1.jpg"
-                },
+                "title": "ゲームをえらんで。",
+                "text": "何してあそぶ？",
                 "actions": [
                     {
                       "type": "postback",
-                      "label": "Buy",
-                      "data": "action=buy&itemid=123"
+                      "label": "じゃんけん",
+                      "data": "janken"
                     },
                     {
                       "type": "postback",
-                      "label": "Add to cart",
-                      "data": "action=add&itemid=123"
+                      "label": "アキネーター",
+                      "data": "akinator"
                     },
-                    {
-                      "type": "uri",
-                      "label": "View detail",
-                      "uri": "http://example.com/page/123"
-                    }
                 ]
             }
         }]
