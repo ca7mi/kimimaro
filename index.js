@@ -182,6 +182,32 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
             } else if ((event.message.text.match(/遊ぼ/)) || (event.message.text.match(/あそぼ/))) {
                 var messages = kimiTemplate.selectGameWithKimi();
                 events_processed.push(bot.replyMessage(event.replyToken, messages));
+            } else if (event.message.text == "あいうえお") {
+                events_processed.push(bot.replyMessage(event.replyToken, {
+                    "type": "template",
+                    "altText": "きみまろとあそぶ",
+                    "template": {
+                        "type": "buttons",
+                        "thumbnailImageUrl": "/image/kimi_1.jpg",
+                        "imageAspectRatio": "rectangle",
+                        "imageSize": "cover",
+                        "imageBackgroundColor": "#FFFFFF",
+                        "title": "ゲームをえらんで。",
+                        "text": "何してあそぶ？",
+                        "actions": [
+                            {
+                                "type": "postback",
+                                "label": "じゃんけん",
+                                "data": "janken"
+                            },
+                            {
+                                "type": "postback",
+                                "label": "アキネーター",
+                                "data": "akinator"
+                            }
+                        ]
+                    }
+                }));
             }
           // スタンプの時はランダムでスタンプ返す
           } else if (event.type == "message" && event.message.type == "sticker") {
