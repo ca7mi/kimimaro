@@ -72,13 +72,18 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                 }
             } else if (event.message.text == "おやすみ"){
                 var messages = [{
-                    type: "text",
-                    text: "いい夢みろよっ"
+                        type: "text",
+                        text: "いい夢みろよっ"
                     },
                     {
                         type: "text",
                         text: "おやすみ"
-                        },
+                    },
+                    {
+                        "type": "sticker",
+                        "packageId": "1",
+                        "stickerId": "2"
+                    },
                 ];
                 events_processed.push(bot.replyMessage(event.replyToken, messages));
                 /*events_processed.push(bot.replyMessage(event.replyToken, {
