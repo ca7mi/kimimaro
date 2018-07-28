@@ -10,7 +10,7 @@ module.exports = class KimiTemplate {
             "altText": "きみまろとあそぶ",
             "template": {
                 "type": "buttons",
-                "thumbnailImageUrl": "./image/kimi_1.jpg",
+                "thumbnailImageUrl": "/image/kimi_1.jpg",
                 "imageAspectRatio": "rectangle",
                 "imageSize": "cover",
                 "imageBackgroundColor": "#FFFFFF",
