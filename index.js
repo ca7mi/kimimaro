@@ -4,8 +4,9 @@ const server = require("express")();
 const line = require("@line/bot-sdk"); // Messaging APIのSDKをインポート
 const dotenv = require('dotenv').config(); // TODO: 使いたいけどうまく反映されない
 
-// 使うファイルと繋げる
+// 使うファイルと繋げる
 const KimiApi = require("./kimi_api");
+const KimiTemplate = require("./kimi_template");
 
 // -----------------------------------------------------------------------------
 // パラメータ設定
@@ -26,6 +27,7 @@ const status = {
 };
 
 const kimiApi = new KimiApi();
+const kimiTemplate = new KimiTemplate();
 
 // -----------------------------------------------------------------------------
 // Webサーバー設定
@@ -176,6 +178,9 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
               }));
             } else if (event.message.text.match(/応援しよ！{0,}$/)) {
                 var messages = kimiApi.goForIt();
+                events_processed.push(bot.replyMessage(event.replyToken, messages));
+            } else if ((event.message.text.match(/遊ぼ/)) || (event.message.text.match(/あそぼ/))) {
+                var messages = kimiTemplate.selectGameWithKimi();
                 events_processed.push(bot.replyMessage(event.replyToken, messages));
             }
           // スタンプの時はランダムでスタンプ返す
