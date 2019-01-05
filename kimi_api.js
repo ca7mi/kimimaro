@@ -31,15 +31,19 @@ module.exports = class KimiApi {
     switch (pkg) {
       case "2":
         stickerId = getRandomNumber(140, 179);
+        return stickerId;
         break;
       case "11537":
         stickerId = getRandomNumber(52002734, 52002773);
+        return stickerId;
         break;
       case "11538":
         stickerId = getRandomNumber(51626494, 51626533);
+        return stickerId;
         break;
       case "11539":
         stickerId = getRandomNumber(52114110, 52114149);
+        return stickerId;
         break;
     }
     return stickerId;
