@@ -188,6 +188,8 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                     altText: "きみまろとあそぶ",
                     template: {
                         type: "buttons",
+                      //  thumbnailImageUrl: "/image/kimi_3.png",
+                        altText: "This is a buttons template",
                         title: "ゲームをえらんで。",
                         text: "何してあそぶ？",
                         actions: [
@@ -201,8 +203,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                                 "label": "アキネーター",
                                 "data": "akinator"
                             }
-                        ],
-                        thumbnailImageUrl: "/image/kimi_3.png"
+                        ]
                     }
                 }));
           // スタンプの時はランダムでスタンプ返す
