@@ -183,31 +183,29 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                 var messages = kimiTemplate.selectGameWithKimi();
                 events_processed.push(bot.replyMessage(event.replyToken, messages));
             } else if (event.message.text == "あいうえお") {
-                events_processed.push(bot.replyMessage(event.replyToken, {
-                  type: "text",
-                  text: "あいうえお！"
-                    /*type: "template",
-                    altText: "きみまろとあそぶ",
-                    template: {
-                        type: "buttons",
-                      //  thumbnailImageUrl: "/image/kimi_3.png",
-                        altText: "This is a buttons template",
-                        title: "ゲームをえらんで。",
-                        text: "何してあそぶ？",
-                        actions: [
-                            {
-                                "type": "message",
-                                "label": "じゃんけん",
-                                "data": "janken"
-                            },
-                            {
-                                "type": "message",
-                                "label": "アキネーター",
-                                "data": "akinator"
-                            }
-                        ]
-                    }*/
-                }));
+                var messages = [{
+                  type: "template",
+                  altText: "きみまろとあそぶ",
+                  template: {
+                      type: "buttons",
+                      thumbnailImageUrl: "/image/kimi_3.png",
+                      title: "ゲームをえらんで。",
+                      text: "何してあそぶ？",
+                      actions: [
+                          {
+                              "type": "message",
+                              "label": "じゃんけん",
+                              "data": "janken"
+                          },
+                          {
+                              "type": "message",
+                              "label": "アキネーター",
+                              "data": "akinator"
+                          }
+                      ]
+                  }
+                }]
+                events_processed.push(bot.replyMessage(event.replyToken, messages));
             }
           // スタンプの時はランダムでスタンプ返す
           } else if (event.type == "message" && event.message.type == "sticker") {
