@@ -184,7 +184,9 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                 events_processed.push(bot.replyMessage(event.replyToken, messages));
             } else if (event.message.text == "あいうえお") {
                 events_processed.push(bot.replyMessage(event.replyToken, {
-                    type: "template",
+                  type: "text",
+                  text: "あいうえお！"
+                  /*  type: "template",
                     altText: "きみまろとあそぶ",
                     template: {
                         type: "buttons",
@@ -204,7 +206,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                                 "data": "akinator"
                             }
                         ]
-                    }
+                    }*/
                 }));
           // スタンプの時はランダムでスタンプ返す
           } else if (event.type == "message" && event.message.type == "sticker") {
