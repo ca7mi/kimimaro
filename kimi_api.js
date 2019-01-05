@@ -21,7 +21,7 @@ module.exports = class KimiApi {
 
   // stamp追加対応
   selectStampPackage(){
-    var packageNumArray = new Array(2,11537,11538,11539);
+    var packageNumArray = new Array("2","11537","11538","11539");
     var pkgResult = packageNumArray[Math.floor( Math.random() * packageNumArray.length)];
     return pkgResult;
   }
@@ -29,16 +29,16 @@ module.exports = class KimiApi {
   selectStickerId(pkg){
     var stickerId;
     switch (pkg) {
-      case 2:
+      case "2":
         stickerId = getRandomNumber(140, 179);
         break;
-      case 11537:
+      case "11537":
         stickerId = getRandomNumber(52002734, 52002773);
         break;
-      case 11538:
+      case "11538":
         stickerId = getRandomNumber(51626494, 51626533);
         break;
-      case 11539:
+      case "11539":
         stickerId = getRandomNumber(52114110, 52114149);
         break;
     }
