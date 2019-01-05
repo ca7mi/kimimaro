@@ -185,27 +185,30 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                   "altText": "きみまろとあそぶ",
                   "template": {
                     "type": "buttons",
-                    "thumbnailImageUrl": "https://github.com/ca7mi/kimimaro/blob/use_template/image/kimi_1.jpg",
+                    //"thumbnailImageUrl": "https://github.com/ca7mi/kimimaro/blob/use_template/image/kimi_1.jpg",
                     "imageAspectRatio": "rectangle",
                     "imageSize": "cover",
                     "imageBackgroundColor": "#FFFFFF",
-                    "title": "何してあそぶ？",
-                    "text": "ゲームをえらんで。",
+                    "title": "なにしてあそぶ？",
+                    "text": "ゲームえらんで。はやくー",
                     "actions": [
                       {
                         "type": "postback",
                         "label": "じゃんけん",
-                        "data": "action=buy&itemid=123"
+                        "data": "action=janken&itemid=111"
+                        "displayText": "じゃんけん"
                       },
                       {
                         "type": "postback",
                         "label": "アキネーター",
-                        "data": "action=add&itemid=123"
+                        "data": "action=achenater&itemid=112"
+                        "displayText": "アキネーター"
                       },
                       {
-                        "type": "uri",
+                        "type": "postback",
                         "label": "なぞとき",
-                        "uri": "http://example.com/page/123"
+                        "data": "action=nazotoki&itemid=113"
+                        "displayText": "なぞとき"
                       }
                     ]
                   }
