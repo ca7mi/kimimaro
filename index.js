@@ -177,6 +177,12 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
             } else if (event.message.text.match(/応援しよ！{0,}$/)) {
                 var messages = kimiApi.goForIt();
                 events_processed.push(bot.replyMessage(event.replyToken, messages));
+            } else if (event.message.text.match(/あそぼ/)) {
+                var messages = {
+                  type: "text",
+                  text: event.message.text
+                };
+                events_processed.push(bot.replyMessage(event.replyToken, messages));
             }
           // スタンプの時はランダムでスタンプ返す
           } else if (event.type == "message" && event.message.type == "sticker") {
