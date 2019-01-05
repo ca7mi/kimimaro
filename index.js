@@ -185,16 +185,16 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                   "altText": "きみまろとあそぶ",
                   "template": {
                     "type": "buttons",
-                    "thumbnailImageUrl": "https://github.com/ca7mi/kimimaro/blob/use_template/image/kimi_1.jpg",
-                    "imageAspectRatio": "rectangle",
-                    "imageSize": "cover",
-                    "imageBackgroundColor": "#FFFFFF",
+                    //"thumbnailImageUrl": "https://github.com/ca7mi/kimimaro/blob/use_template/image/kimi_1.jpg",
+                    //"imageAspectRatio": "rectangle",
+                    //"imageSize": "cover",
+                    //"imageBackgroundColor": "#FFFFFF",
                     "title": "なにしてあそぶ？",
                     "text": "ゲームえらんで。はやくー",
                     "defaultAction": {
                       "type": "message",
                       "label": "message",
-                      "text": "もーまだなのー？"
+                      "text": "きみまろ何したいの？"
                     },
                     "actions": [
                       {
