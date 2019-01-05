@@ -180,67 +180,15 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                 var messages = kimiApi.goForIt();
                 events_processed.push(bot.replyMessage(event.replyToken, messages));
             } else if ((event.message.text.match(/遊ぼ/)) || (event.message.text.match(/あそぼ/))) {
-                var messages = kimiTemplate.selectGameWithKimi();
-                events_processed.push(bot.replyMessage(event.replyToken, messages));
-            } else if (event.message.text == "あいうえお") {
-                var messages = [{
-                /*  "type": "template",
-                  "altText": "きみまろとあそぶ",
-                  "template": {
-                      "type": "buttons",
-                      "thumbnailImageUrl": "/image/kimi_3.png",
-                      "title": "ゲームをえらんで。",
-                      "text": "何してあそぶ？",
-                      "actions": [
-                          {
-                              "type": "message",
-                              "label": "じゃんけん",
-                              "data": "janken"
-                          },
-                          {
-                              "type": "message",
-                              "label": "アキネーター",
-                              "data": "akinator"
-                          }
-                      ]
-                  }*/
-                  "type": "template",
-  "altText": "This is a buttons template",
-  "template": {
-      "type": "buttons",
-      "thumbnailImageUrl": "https://example.com/bot/images/image.jpg",
-      "imageAspectRatio": "rectangle",
-      "imageSize": "cover",
-      "imageBackgroundColor": "#FFFFFF",
-      "title": "Menu",
-      "text": "Please select",
-      "defaultAction": {
-          "type": "uri",
-          "label": "View detail",
-          "uri": "http://example.com/page/123"
-      },
-      "actions": [
-          {
-            "type": "postback",
-            "label": "Buy",
-            "data": "action=buy&itemid=123"
-          },
-          {
-            "type": "postback",
-            "label": "Add to cart",
-            "data": "action=add&itemid=123"
-          },
-          {
-            "type": "uri",
-            "label": "View detail",
-            "uri": "http://example.com/page/123"
-          }
-      ]
-  }
-
-                }]
-                events_processed.push(bot.replyMessage(event.replyToken, messages));
-            }
+                var templateMsg = kimiTemplate.selectGameWithKimi();
+                if (templateMsg = null) {
+                  templateMsg = {
+                    type: "text",
+                    text: event.message.text
+                  }
+                }
+                events_processed.push(bot.replyMessage(event.replyToken, templateMsg));
+            } 
           // スタンプの時はランダムでスタンプ返す
           } else if (event.type == "message" && event.message.type == "sticker") {
             var num = kimiApi.getRandomNumber(140, 179);
