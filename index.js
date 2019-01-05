@@ -6,6 +6,7 @@ const dotenv = require('dotenv').config(); // TODO: 使いたいけどうまく�
 
 // 使うファイルと繋げる
 const KimiApi = require("./kimi_api");
+const KimiTemplate = require("./kimi_template");
 
 // -----------------------------------------------------------------------------
 // パラメータ設定
@@ -178,7 +179,8 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                 var messages = kimiApi.goForIt();
                 events_processed.push(bot.replyMessage(event.replyToken, messages));
             } else if (event.message.text.match(/あそぼ/)) {
-                var messages = {
+              var messages = kimiTemplate.selectGameWithKimi();
+                /*var messages = {
                   "type": "template",
                   "altText": "きみまろとあそぶ",
                   "template": {
@@ -189,11 +191,6 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                     "imageBackgroundColor": "#FFFFFF",
                     "title": "何してあそぶ？",
                     "text": "ゲームをえらんで。",
-                    "defaultAction": {
-                      "type": "uri",
-                      "label": "View detail",
-                      "uri": "https://github.com/ca7mi/kimimaro/blob/use_template/image/kimi_1.jpg?raw=true"
-                    },
                     "actions": [
                       {
                         "type": "postback",
@@ -212,7 +209,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                       }
                     ]
                   }
-                };
+                };*/
                 events_processed.push(bot.replyMessage(event.replyToken, messages));
             }
           // スタンプの時はランダムでスタンプ返す
