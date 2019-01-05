@@ -180,20 +180,35 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
             } else if (event.message.text.match(/あそぼ/)) {
                 var messages = {
                   "type": "template",
-                  "altText": "this is a confirm template",
+                  "altText": "This is a buttons template",
                   "template": {
-                    "type": "confirm",
-                    "text": "Are you sure?",
+                    "type": "buttons",
+                    "thumbnailImageUrl": "https://example.com/bot/images/image.jpg",
+                    "imageAspectRatio": "rectangle",
+                    "imageSize": "cover",
+                    "imageBackgroundColor": "#FFFFFF",
+                    "title": "Menu",
+                    "text": "Please select",
+                    "defaultAction": {
+                      "type": "uri",
+                      "label": "View detail",
+                      "uri": "http://example.com/page/123"
+                    },
                     "actions": [
                       {
-                        "type": "message",
-                        "label": "Yes",
-                        "text": "yes"
+                        "type": "postback",
+                        "label": "Buy",
+                        "data": "action=buy&itemid=123"
                       },
                       {
-                        "type": "message",
-                        "label": "No",
-                        "text": "no"
+                        "type": "postback",
+                        "label": "Add to cart",
+                        "data": "action=add&itemid=123"
+                      },
+                      {
+                        "type": "uri",
+                        "label": "View detail",
+                        "uri": "http://example.com/page/123"
                       }
                     ]
                   }
