@@ -179,10 +179,10 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
             } else if (event.message.text.match(/応援しよ！{0,}$/)) {
                 var messages = kimiApi.goForIt();
                 events_processed.push(bot.replyMessage(event.replyToken, messages));
-            } else if ((event.message.text.match(/遊ぼ/)) || (event.message.text.match(/あそぼ/))) {
+            /*} else if ((event.message.text.match(/遊ぼ/)) || (event.message.text.match(/あそぼ/))) {
                 var messages = kimiTemplate.selectGameWithKimi();
                 events_processed.push(bot.replyMessage(event.replyToken, messages));
-            /*} else if (event.message.text == "あいうえお") {
+            } else if (event.message.text == "あいうえお") {
                 events_processed.push(bot.replyMessage(event.replyToken, {
                   type: "text",
                   text: "あいうえお！"
