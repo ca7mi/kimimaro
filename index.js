@@ -184,13 +184,13 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                 events_processed.push(bot.replyMessage(event.replyToken, messages));
             } else if (event.message.text == "あいうえお") {
                 events_processed.push(bot.replyMessage(event.replyToken, {
-                    "type": "template",
-                    "altText": "きみまろとあそぶ",
-                    "template": {
-                        "type": "buttons",
-                        "title": "ゲームをえらんで。",
-                        "text": "何してあそぶ？",
-                        "actions": [
+                    type: "template",
+                    altText: "きみまろとあそぶ",
+                    template: {
+                        type: "buttons",
+                        title: "ゲームをえらんで。",
+                        text: "何してあそぶ？",
+                        actions: [
                             {
                                 "type": "message",
                                 "label": "じゃんけん",
@@ -202,7 +202,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                                 "data": "akinator"
                             }
                         ],
-                        "thumbnailImageUrl": "/image/kimi_3.png"
+                        thumbnailImageUrl: "/image/kimi_3.png"
                     }
                 }));
             }
