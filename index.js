@@ -185,30 +185,32 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                   "altText": "きみまろとあそぶ",
                   "template": {
                     "type": "buttons",
-                    //"thumbnailImageUrl": "https://github.com/ca7mi/kimimaro/blob/use_template/image/kimi_1.jpg",
+                    "thumbnailImageUrl": "https://github.com/ca7mi/kimimaro/blob/use_template/image/kimi_1.jpg",
                     "imageAspectRatio": "rectangle",
                     "imageSize": "cover",
                     "imageBackgroundColor": "#FFFFFF",
                     "title": "なにしてあそぶ？",
                     "text": "ゲームえらんで。はやくー",
+                    "defaultAction": {
+                      "type": "message",
+                      "label": "message",
+                      "text": "もーまだなのー？"
+                    },
                     "actions": [
                       {
-                        "type": "postback",
+                        "type": "message",
                         "label": "じゃんけん",
-                        "data": "action=janken&itemid=111"
-                        "displayText": "じゃんけん"
+                        "text": "じゃんけん"
                       },
                       {
-                        "type": "postback",
+                        "type": "message",
                         "label": "アキネーター",
-                        "data": "action=achenater&itemid=112"
-                        "displayText": "アキネーター"
+                        "text": "アキネーター"
                       },
                       {
-                        "type": "postback",
+                        "type": "message",
                         "label": "なぞとき",
-                        "data": "action=nazotoki&itemid=113"
-                        "displayText": "なぞとき"
+                        "text": "なぞとき"
                       }
                     ]
                   }
