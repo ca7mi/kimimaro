@@ -205,7 +205,6 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                         thumbnailImageUrl: "/image/kimi_3.png"
                     }
                 }));
-            }
           // スタンプの時はランダムでスタンプ返す
           } else if (event.type == "message" && event.message.type == "sticker") {
             var num = kimiApi.getRandomNumber(140, 179);
