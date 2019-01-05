@@ -20,11 +20,15 @@ module.exports = class KimiApi {
   };
 
   // stamp追加対応
-  selectStamp(){
+  selectStampPackage(){
     var packageNumArray = new Array(2,11537,11538,11539);
     var pkgResult = packageNumArray[Math.floor( Math.random() * packageNumArray.length)];
+    return pkgResult;
+  }
+
+  selectStickerId(pkg){
     var stickerId;
-    switch (pkgResult) {
+    switch (pkg) {
       case 2:
         stickerId = getRandomNumber(140, 179);
         break;
@@ -38,8 +42,7 @@ module.exports = class KimiApi {
         stickerId = getRandomNumber(52114110, 52114149);
         break;
     }
-    var result = [pkgResult, stickerId];
-    return result;
+    return stickerId;
   }
 
   // ランダムな数字を取得
