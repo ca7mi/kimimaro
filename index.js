@@ -184,14 +184,14 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                 events_processed.push(bot.replyMessage(event.replyToken, messages));
             } else if (event.message.text == "あいうえお") {
                 var messages = [{
-                  type: "template",
-                  altText: "きみまろとあそぶ",
-                  template: {
-                      type: "buttons",
-                      thumbnailImageUrl: "/image/kimi_3.png",
-                      title: "ゲームをえらんで。",
-                      text: "何してあそぶ？",
-                      actions: [
+                  "type": "template",
+                  "altText": "きみまろとあそぶ",
+                  "template": {
+                      "type": "buttons",
+                      "thumbnailImageUrl": "/image/kimi_3.png",
+                      "title": "ゲームをえらんで。",
+                      "text": "何してあそぶ？",
+                      "actions": [
                           {
                               "type": "message",
                               "label": "じゃんけん",
