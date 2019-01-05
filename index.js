@@ -183,7 +183,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                   "altText": "きみまろとあそぶ",
                   "template": {
                     "type": "buttons",
-                    "thumbnailImageUrl": "https://kimimaro-bot/image/kimi_1.jpg",
+                    "thumbnailImageUrl": "https://github.com/ca7mi/kimimaro/blob/use_template/image/kimi_1.jpg",
                     "imageAspectRatio": "rectangle",
                     "imageSize": "cover",
                     "imageBackgroundColor": "#FFFFFF",
@@ -192,7 +192,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                     "defaultAction": {
                       "type": "uri",
                       "label": "View detail",
-                      "uri": "https://github.com/ca7mi/kimimaro/blob/use_template/image/kimi_1.jpg"
+                      "uri": "https://github.com/ca7mi/kimimaro/blob/use_template/image/kimi_1.jpg?raw=true"
                     },
                     "actions": [
                       {
