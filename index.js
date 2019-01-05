@@ -179,8 +179,8 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                 var messages = kimiApi.goForIt();
                 events_processed.push(bot.replyMessage(event.replyToken, messages));
             } else if (event.message.text.match(/あそぼ/)) {
-              var messages = kimiTemplate.selectGameWithKimi();
-                /*var messages = {
+              //var messages = kimiTemplate.selectGameWithKimi();
+                var messages = {
                   "type": "template",
                   "altText": "きみまろとあそぶ",
                   "template": {
@@ -209,7 +209,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                       }
                     ]
                   }
-                };*/
+                };
                 events_processed.push(bot.replyMessage(event.replyToken, messages));
             }
           // スタンプの時はランダムでスタンプ返す
