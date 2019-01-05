@@ -24,7 +24,7 @@ module.exports = class KimiApi {
     var packageNumArray = new Array("2","11537","11538","11539");
     var pkgResult = packageNumArray[Math.floor( Math.random() * packageNumArray.length)];
     return pkgResult;
-  }
+  };
 
   selectStickerId(pkg){
     var stickerId;
@@ -43,7 +43,7 @@ module.exports = class KimiApi {
         break;
     }
     return stickerId;
-  }
+  };
 
   // ランダムな数字を取得
   getRandomNumber(min, max){
