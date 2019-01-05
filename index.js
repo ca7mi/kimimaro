@@ -183,7 +183,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                   "altText": "きみまろとあそぶ",
                   "template": {
                     "type": "buttons",
-                    "thumbnailImageUrl": "https://example.com/bot/images/image.jpg",
+                    "thumbnailImageUrl": "/image/kimi_1.jpg",
                     "imageAspectRatio": "rectangle",
                     "imageSize": "cover",
                     "imageBackgroundColor": "#FFFFFF",
