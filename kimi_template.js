@@ -5,7 +5,7 @@ module.exports = class KimiTemplate {
 
     // ボタンテンプレートを使ってみる
     selectGameWithKimi(){
-        var buttonTemp = [{
+        var buttonTemp = {
             "type": "template",
             "altText": "きみまろとあそぶ",
             "template": {
@@ -29,7 +29,7 @@ module.exports = class KimiTemplate {
                     }
                 ]
             }
-        }];
+        };
         return buttonTemp;
     }
 }

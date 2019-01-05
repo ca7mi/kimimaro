@@ -179,14 +179,14 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
             } else if (event.message.text.match(/応援しよ！{0,}$/)) {
                 var messages = kimiApi.goForIt();
                 events_processed.push(bot.replyMessage(event.replyToken, messages));
-            /*} else if ((event.message.text.match(/遊ぼ/)) || (event.message.text.match(/あそぼ/))) {
+            } else if ((event.message.text.match(/遊ぼ/)) || (event.message.text.match(/あそぼ/))) {
                 var messages = kimiTemplate.selectGameWithKimi();
                 events_processed.push(bot.replyMessage(event.replyToken, messages));
             } else if (event.message.text == "あいうえお") {
                 events_processed.push(bot.replyMessage(event.replyToken, {
                   type: "text",
                   text: "あいうえお！"
-                  /*  type: "template",
+                    /*type: "template",
                     altText: "きみまろとあそぶ",
                     template: {
                         type: "buttons",
@@ -206,8 +206,9 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                                 "data": "akinator"
                             }
                         ]
-                    }
-                }));*/
+                    }*/
+                }));
+            }
           // スタンプの時はランダムでスタンプ返す
           } else if (event.type == "message" && event.message.type == "sticker") {
             var num = kimiApi.getRandomNumber(140, 179);
