@@ -179,8 +179,24 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                 events_processed.push(bot.replyMessage(event.replyToken, messages));
             } else if (event.message.text.match(/あそぼ/)) {
                 var messages = {
-                  type: "text",
-                  text: event.message.text
+                  "type": "template",
+                  "altText": "this is a confirm template",
+                  "template": {
+                    "type": "confirm",
+                    "text": "Are you sure?",
+                    "actions": [
+                      {
+                        "type": "message",
+                        "label": "Yes",
+                        "text": "yes"
+                      },
+                      {
+                        "type": "message",
+                        "label": "No",
+                        "text": "no"
+                      }
+                    ]
+                  }
                 };
                 events_processed.push(bot.replyMessage(event.replyToken, messages));
             }
