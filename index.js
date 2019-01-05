@@ -180,15 +180,15 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
             } else if (event.message.text.match(/あそぼ/)) {
                 var messages = {
                   "type": "template",
-                  "altText": "This is a buttons template",
+                  "altText": "きみまろとあそぶ",
                   "template": {
                     "type": "buttons",
                     "thumbnailImageUrl": "https://example.com/bot/images/image.jpg",
                     "imageAspectRatio": "rectangle",
                     "imageSize": "cover",
                     "imageBackgroundColor": "#FFFFFF",
-                    "title": "Menu",
-                    "text": "Please select",
+                    "title": "何してあそぶ？",
+                    "text": "ゲームをえらんで。",
                     "defaultAction": {
                       "type": "uri",
                       "label": "View detail",
@@ -197,17 +197,17 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                     "actions": [
                       {
                         "type": "postback",
-                        "label": "Buy",
+                        "label": "じゃんけん",
                         "data": "action=buy&itemid=123"
                       },
                       {
                         "type": "postback",
-                        "label": "Add to cart",
+                        "label": "アキネーター",
                         "data": "action=add&itemid=123"
                       },
                       {
                         "type": "uri",
-                        "label": "View detail",
+                        "label": "なぞとき",
                         "uri": "http://example.com/page/123"
                       }
                     ]
