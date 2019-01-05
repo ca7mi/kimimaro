@@ -219,12 +219,11 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
             }
           // スタンプの時はランダムでスタンプ返す
           } else if (event.type == "message" && event.message.type == "sticker") {
-            var num = kimiApi.getRandomNumber(140, 179);
-            console.log(`num : ${num}`);
+            var result = kimiApi.selectStamp();
             events_processed.push(bot.replyMessage(event.replyToken, {
                 "type": "sticker",
-                "packageId": "2",
-                "stickerId": num
+                "packageId": result[0],
+                "stickerId": result[1]
             }));
           };
       } else if (kimiStatus === status.sleep ) {

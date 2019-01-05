@@ -19,6 +19,29 @@ module.exports = class KimiApi {
     return nowTime;
   };
 
+  // stamp追加対応
+  selectStamp(){
+    var packageNumArray = new Array(2,11537,11538,11539);
+    var pkgResult = packageNumArray[Math.floor( Math.random() * contents.length)]
+    var stickerId
+    switch (pkgResult) {
+      case 2:
+        stickerId = getRandomNumber(140, 179);
+        break;
+      case 11537:
+        stickerId = getRandomNumber(52002734, 52002773);
+        break;
+      case 11538:
+        stickerId = getRandomNumber(51626494, 51626533);
+        break;
+      case 11539:
+        stickerId = getRandomNumber(52114110, 52114149);
+        break;
+    }
+    var result = [pkgResult, stickerId];
+    return result;
+  }
+
   // ランダムな数字を取得
   getRandomNumber(min, max){
     var result = Math.floor( Math.random() * (max + 1 - min) ) + min;
